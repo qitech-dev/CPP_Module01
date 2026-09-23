@@ -52,7 +52,17 @@ int main(int argc, char **argv)
 
 	result += content.substr(pos);
 
-	std::cout << content;
+	std::string outputName = std::string(argv[1]) + ".replace";
+	std::ofstream output(outputName.c_str());
+
+	if (!output.is_open())
+	{
+		std::cerr << "Error: cannot creat output file" << std::endl;
+		return 1;
+	}
+
+	output << result;
+	output.close();
 
 	return 0;
 }
