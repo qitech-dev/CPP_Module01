@@ -28,3 +28,29 @@ void Harl::error(void)
 			  << "I want to speak to the manager now."
 			  << std::endl;
 }
+
+void Harl::complain(std::string level)
+{
+	std::string levels[4] = {
+		"DDEBUG",
+		"INFO",
+		"WARNING",
+		"ERROR"
+	};
+
+	void (Harl::*functions[4])(void) = {
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
+		&Harl::error
+	};
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (level == levels[i])
+		{
+			(this->*functions[i])();
+			return;
+		}
+	}
+}
