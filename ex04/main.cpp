@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
 int main(int argc, char **argv)
 {
@@ -9,9 +10,27 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	std::cout << "filename: " << argv[1] << std::endl;
-	std::cout << "s1: " << argv[2] << std::endl;
-	std::cout << "s2: " << argv[3] << std::endl;
+	std::ifstream input(argv[1]);
+
+	if (!input.is_open())
+	{
+		std::cerr << "Error: cannot open input file" << std::endl;
+		return 1;
+	}
+
+	std::string content;
+	std::string line;
+
+	while (std::getline(input, line))
+	{
+		content += line;
+		if (!input.eof())
+			content += "\n";
+	}
+	
+	input.close();
+
+	std::cout << content;
 
 	return 0;
 }
