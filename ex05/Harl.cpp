@@ -32,7 +32,7 @@ void Harl::error(void)
 void Harl::complain(std::string level)
 {
 	std::string levels[4] = {
-		"DDEBUG",
+		"DEBUG",
 		"INFO",
 		"WARNING",
 		"ERROR"

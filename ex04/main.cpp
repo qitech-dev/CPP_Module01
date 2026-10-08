@@ -6,7 +6,7 @@ int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage: ./replace <filename> <s1> <s2>" << std::endl;
+		std::cout << "Usage: ./replace <filename> <s1> <s2>" << std::endl;
 		return 1;
 	}
 
@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 
 	if (s1.empty())
 	{
-		std::cerr << "Error: s1 cannout be empty" << std::endl;
+		std::cout << "Error: s1 cannout be empty" << std::endl;
 		return 1;
 	}
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
 	if (!input.is_open())
 	{
-		std::cerr << "Error: cannot open input file" << std::endl;
+		std::cout << "Error: cannot open input file" << std::endl;
 		return 1;
 	}
 
@@ -37,6 +37,12 @@ int main(int argc, char **argv)
 			content += "\n";
 	}
 	
+	if (input.bad() || (input.fail() && !input.eof()))
+	{
+		std::cout << "Error: cannot read input file" << std::endl;
+		return 1;
+	}
+
 	input.close();
 
 	std::string result;
@@ -57,12 +63,18 @@ int main(int argc, char **argv)
 
 	if (!output.is_open())
 	{
-		std::cerr << "Error: cannot creat output file" << std::endl;
+		std::cout << "Error: cannot creat output file" << std::endl;
 		return 1;
 	}
 
 	output << result;
 	output.close();
+
+	if (!output)
+	{
+		std::cout << "Error: cannot write output file" << std::endl;
+		return 1;
+	}
 
 	return 0;
 }

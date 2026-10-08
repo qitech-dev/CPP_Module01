@@ -49,7 +49,7 @@ void Harl::complain(std::string level)
 	{
 		if (level == levels[i])
 		{
-			std::cout << "[" << levels[i] << "]" << std::endl;
+			std::cout << "[ " << levels[i] << " ]" << std::endl;
 			(this->*functions[i])();
 			std::cout << std::endl;
 			return;

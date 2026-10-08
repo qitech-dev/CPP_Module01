@@ -11,6 +11,9 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
+%.o: %.cpp Weapon.hpp HumanA.hpp HumanB.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
 clean:
 	rm -f $(OBJS)
 
